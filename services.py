@@ -1,6 +1,7 @@
 from datetime import datetime
 from Models import User, Company, Application, status
 import hashlib
+import json
 
 users = []
 companies = []
@@ -236,7 +237,25 @@ def filter_applications_by_status(status: str):
 
 
 def save_data():
-    pass
+    user_json = []
+    companies_json = []
+    applications_json = []
+
+    for user in users:
+        user_json.append(user.to_dict())
+    for company in companies:
+        companies_json.append(company.to_dict())
+    for application in applications:
+        applications_json.append(application.to_dict())
+    
+    with open("users.json", "w") as u:
+        json.dump(user_json,u, indent=4)
+    with open("companies.json","w") as c:    
+        json.dump(companies_json,c,  indent=4)
+    with open("applications.json", "w") as a:
+        json.dump(applications_json,a, indent=4)
+
+    return True
 
 
 def load_data():
