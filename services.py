@@ -259,7 +259,36 @@ def save_data():
 
 
 def load_data():
-    pass
+    users.clear()
+    companies.clear()
+    applications.clear()
+    try: 
+        with open("users.json", "r") as u:
+            user_json = json.load(u)
+            for i in user_json:
+                user = User.from_dict(i)
+                users.append(user)
+
+        with open("companies.json", "r") as c:
+            companies_json = json.load(c)
+            for i in companies_json:
+                company = Company.from_dict(i)
+                companies.append(company)
+
+        with open("applications.json", "r") as a:
+            applications_json = json.load(a)
+            for i in applications_json:
+                application = Application.from_dict(i)
+                applications.append(application)
+
+        return True
+    
+    except FileNotFoundError:
+        return False 
+
+    except Exception as e:
+        print(f"error: {e}")
+        return False
 
 
 def export_to_csv():
