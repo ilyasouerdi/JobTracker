@@ -238,26 +238,29 @@ def filter_applications_by_status(status: str):
 
 
 def save_data():
-    user_json = []
-    companies_json = []
-    applications_json = []
+    try:
+        user_json = []
+        companies_json = []
+        applications_json = []
 
-    for user in users:
-        user_json.append(user.to_dict())
-    for company in companies:
-        companies_json.append(company.to_dict())
-    for application in applications:
-        applications_json.append(application.to_dict())
-    
-    with open("users.json", "w") as u:
-        json.dump(user_json,u, indent=4)
-    with open("companies.json","w") as c:    
-        json.dump(companies_json,c,  indent=4)
-    with open("applications.json", "w") as a:
-        json.dump(applications_json,a, indent=4)
+        for user in users:
+            user_json.append(user.to_dict())
+        for company in companies:
+            companies_json.append(company.to_dict())
+        for application in applications:
+            applications_json.append(application.to_dict())
+        
+        with open("users.json", "w") as u:
+            json.dump(user_json,u, indent=4)
+        with open("companies.json","w") as c:    
+            json.dump(companies_json,c,  indent=4)
+        with open("applications.json", "w") as a:
+            json.dump(applications_json,a, indent=4)
 
-    return True
-
+        return True
+    except Exception as e:
+        print(f"error: {e}")
+        return False
 
 def load_data():
     users.clear()
@@ -303,7 +306,7 @@ def export_to_csv():
 
         with open("users.csv", "w", newline="") as f:
             writer = csv.writer(f)
-            writer.writerow(["id", "name", "email", "pass_word_hash", "created_at"])
+            writer.writerow(["id", "name", "email", "password_hash", "created_at"])
             for user in users:
                 writer.writerow([user.id, user.name, user.email, user.pass_word_hash, user.created_at])
         
