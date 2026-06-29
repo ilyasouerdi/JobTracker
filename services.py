@@ -296,4 +296,28 @@ def export_to_csv():
 
 
 def generate_statistics():
-    pass
+    statistics = {}
+    total_applications = len(applications)
+    statistics["total_users"] = len(users)
+    statistics["total_companies"] = len(companies)
+    for s in status :
+        count = 0
+        for i in applications:
+            if i.status == s:
+               count += 1
+        statistics[s] = count
+
+    if len(applications) > 0:
+        total_salary = 0
+        for application in applications:
+            total_salary += application.salary_expected
+        avg_salary = total_salary / len(applications)
+        statistics["Average_salary"] = avg_salary
+        statistics["total_applications"] = total_applications
+    else:
+        statistics["Average_salary"] = 0
+        statistics["total_applications"] = 0
+
+    return statistics
+
+    
