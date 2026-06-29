@@ -2,6 +2,7 @@ from datetime import datetime
 from Models import User, Company, Application, status
 import hashlib
 import json
+import csv
 
 users = []
 companies = []
@@ -292,7 +293,31 @@ def load_data():
 
 
 def export_to_csv():
-    pass
+    try:
+    
+        with open("applications.csv", "w", newline="") as f:
+            writer = csv.writer(f)
+            writer.writerow(["id", "user_id", "company_id", "position", "status", "date_applied", "salary_expected", "note"])
+            for application in applications:
+                writer.writerow([application.id, application.user_id, application.company_id, application.position, application.status, application.date_applied, application.salary_expected, application.note])
+
+        with open("users.csv", "w", newline="") as f:
+            writer = csv.writer(f)
+            writer.writerow(["id", "name", "email", "pass_word_hash", "created_at"])
+            for user in users:
+                writer.writerow([user.id, user.name, user.email, user.pass_word_hash, user.created_at])
+        
+        with open("companies.csv", "w", newline="") as f:
+            writer = csv.writer(f)
+            writer.writerow(["id", "name", "website", "location", "industry"])
+            for company in companies:
+                writer.writerow([company.id, company.name, company.website, company.location, company.industry])
+
+        return True
+    except Exception as e:
+        print(f"error: {e}")
+        return False
+    
 
 
 def generate_statistics():
@@ -320,4 +345,5 @@ def generate_statistics():
 
     return statistics
 
+    
     
