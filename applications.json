@@ -1,0 +1,22 @@
+[
+    {
+        "id": 1,
+        "user_id": 1,
+        "company_id": 1,
+        "position": "tech lead",
+        "status": "Applied",
+        "date_applied": "2026-06-30T01:07:00.325969",
+        "salary_expected": 12000.0,
+        "note": "it's a great job"
+    },
+    {
+        "id": 2,
+        "user_id": 2,
+        "company_id": 2,
+        "position": "art maker",
+        "status": "Applied",
+        "date_applied": "2026-06-30T01:09:57.366661",
+        "salary_expected": 13000.0,
+        "note": "art is good"
+    }
+]
